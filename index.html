@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dra. Roseli Bispo Advogados</title>
+  
+  <!-- Google Fonts: Playfair Display + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Basecoat CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">
+  
+  <!-- System Shell CSS & JS -->
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Complements basecoat; artifacts override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: #0a8f3c; }
+.kpi .kpi-delta.down { color: #cf3131; }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+</style>
+  
+
+  <style>
+    :root {
+      --navy-900: #0B1F3A;
+      --navy-800: #102A4C;
+      --navy-700: #183B68;
+      --gold-500: #C9A227;
+      --gold-600: #B38F1E;
+      --gold-400: #DFB93C;
+      --gold-light: #F9F4E8;
+      --accent: #C9A227;
+      --accent-contrast: #0B1F3A;
+      --bg: #F7F8FA;
+      --surface: #FFFFFF;
+      --text: #1E293B;
+      --text-muted: #475569;
+      --border: #E2E8F0;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Formatação Justificada para todos os textos corridos e parágrafos */
+    p, 
+    .hero-subtitle,
+    .seal-desc,
+    .about-text p,
+    .adv-quote,
+    .value-item p,
+    .exec-card p,
+    .exec-highlights-list li,
+    .area-card p,
+    .diff-card p,
+    .team-body-col p,
+    .testimonial-text,
+    .contact-left p,
+    .form-intro,
+    .footer-brand p,
+    .footer-disclaimer {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    h1, h2, h3, h4, .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      color: var(--navy-900);
+      letter-spacing: -0.01em;
+    }
+
+    /* Top utility bar */
+    .top-bar {
+      background-color: #071527;
+      color: #CBD5E1;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+      padding: 6px 0;
+    }
+
+    .top-bar a {
+      color: #E2E8F0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .top-bar a:hover {
+      color: var(--gold-400);
+    }
+
+    /* Header Nav */
+    header.site-header {
+      background: #0B1F3A;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+      border-bottom: 2px solid var(--gold-500);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .header-logo-img {
+      height: 58px;
+      width: auto;
+      max-width: 190px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    }
+
+    .brand-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title span.gold-dot {
+      color: var(--gold-500);
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold-400);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #F1F5F9;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-400);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--gold-500);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--gold-500);
+      color: #FFF;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+      color: #0B1F3A !important;
+      font-weight: 700;
+      padding: 0.65rem 1.4rem;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #DFB93C;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(201, 162, 39, 0.25);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(201, 162, 39, 0.4);
+      color: #071527 !important;
+    }
+
+    .btn-outline-gold {
+      background: transparent;
+      color: #FFFFFF !important;
+      border: 1.5px solid var(--gold-500);
+      padding: 0.65rem 1.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-outline-gold:hover {
+      background: rgba(201, 162, 39, 0.15);
+      border-color: #DFB93C;
+      color: #FFFFFF !important;
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(145deg, #071527 0%, #0B1F3A 60%, #102A4C 100%);
+      color: #FFFFFF;
+      padding: 5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--gold-500);
+    }
+
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0.05;
+      background-image: radial-gradient(#C9A227 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201, 162, 39, 0.15);
+      border: 1px solid rgba(201, 162, 39, 0.4);
+      color: var(--gold-400);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-size: 2.85rem;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin: 0 0 1.25rem 0;
+    }
+
+    .hero-subtitle {
+      font-size: 1.12rem;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+      max-width: 600px;
+    }
+
+    .hero-badge-oab {
+      background: rgba(16, 42, 76, 0.85);
+      border-left: 3px solid var(--gold-500);
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      color: #E2E8F0;
+      margin-bottom: 2rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .hero-focus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.22) 0%, rgba(201, 162, 39, 0.08) 100%);
+      border: 1px solid var(--gold-500);
+      color: var(--gold-400);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      padding: 7px 14px;
+      border-radius: 6px;
+      margin-bottom: 0.85rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-badge-oab strong {
+      color: #FFFFFF;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Moldura elegante dourada para a foto da advogada */
+    .lawyer-photo-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lawyer-gold-frame {
+      position: relative;
+      border: 1.5px solid var(--gold-500);
+      padding: 8px;
+      background: linear-gradient(145deg, rgba(201, 162, 39, 0.2) 0%, rgba(11, 31, 58, 0.8) 100%);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(201, 162, 39, 0.15);
+      border-radius: 6px;
+    }
+
+    /* Cantos refinados dourados */
+    .lawyer-gold-frame::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border: 1px solid rgba(201, 162, 39, 0.4);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .corner-ornament {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--gold-400);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .corner-tl { top: -2px; left: -2px; border-top: 2px solid var(--gold-400); border-left: 2px solid var(--gold-400); }
+    .corner-tr { top: -2px; right: -2px; border-top: 2px solid var(--gold-400); border-right: 2px solid var(--gold-400); }
+    .corner-bl { bottom: -2px; left: -2px; border-bottom: 2px solid var(--gold-400); border-left: 2px solid var(--gold-400); }
+    .corner-br { bottom: -2px; right: -2px; border-bottom: 2px solid var(--gold-400); border-right: 2px solid var(--gold-400); }
+
+    .lawyer-portrait-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 4px;
+      border: 1px solid rgba(201, 162, 39, 0.45);
+    }
+
+    .hero-photo-container {
+      max-width: 420px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-photo-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(7, 21, 39, 0.9);
+      border: 1px solid var(--gold-500);
+      color: #FFFFFF;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 3;
+    }
+
+    .hero-photo-tag span {
+      color: var(--gold-400);
+      font-weight: 700;
+    }
+
+    /* Generic Section Styles */
+    .section-wrap {
+      padding: 5rem 1.5rem;
+    }
+
+    .container-wide {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header-center {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-eyebrow {
+      color: var(--gold-600);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--gold-500);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about-image-card {
+      position: relative;
+    }
+
+    .about-image-frame {
+      background: linear-gradient(135deg, #0B1F3A 0%, #183B68 100%);
+      border-radius: 12px;
+      padding: 2.5rem;
+      color: #FFFFFF;
+      border: 1px solid rgba(201, 162, 39, 0.4);
+      box-shadow: 0 12px 30px rgba(11, 31, 58, 0.12);
+      position: relative;
+    }
+
+    .frame-border-accent {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: 10px;
+      bottom: 10px;
+      border: 2px solid var(--gold-500);
+      border-radius: 12px;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .adv-name {
+      font-size: 1.85rem;
+      color: #FFFFFF;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .adv-oab {
+      color: var(--gold-400);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .adv-quote {
+      font-style: italic;
+      color: #E2E8F0;
+      border-left: 2px solid var(--gold-500);
+      padding-left: 1rem;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .about-text p {
+      font-size: 1.02rem;
+      color: #334155;
+      margin-bottom: 1.25rem;
+      line-height: 1.7;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .value-item {
+      background: #FFFFFF;
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold-500);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .value-item h4 {
+      margin: 0 0 0.35rem;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .value-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Especialidade em Execuções Section */
+    .specialty-section {
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+      border-top: 1px solid var(--border);
+    }
+
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .exec-card {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--gold-500);
+      box-shadow: 0 6px 20px rgba(11, 31, 58, 0.05);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .exec-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(11, 31, 58, 0.1);
+      border-color: rgba(201, 162, 39, 0.45);
+    }
+
+    .exec-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .exec-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: rgba(201, 162, 39, 0.12);
+      border: 1px solid rgba(201, 162, 39, 0.35);
+      color: var(--gold-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .exec-badge-pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gold-600);
+      background: var(--gold-light);
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-bottom: 0.35rem;
+      border: 1px solid rgba(201, 162, 39, 0.25);
+    }
+
+    .exec-card h3 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--navy-900);
+    }
+
+    .exec-card p {
+      color: #334155;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin: 0 0 1.25rem;
+      flex-grow: 1;
+    }
+
+    .exec-highlights-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .exec-highlights-list li {
+      font-size: 0.88rem;
+      color: #475569;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+
+    .exec-highlights-list li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--gold-600);
+    }
+
+    /* Practice Areas */
+    .areas-bg {
+      background-color: #FFFFFF;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .area-card {
+      background: #F7F8FA;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .area-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(11, 31, 58, 0.08);
+      border-color: rgba(201, 162, 39, 0.5);
+      background: #FFFFFF;
+    }
+
+    .area-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-500);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .area-card:hover::before {
+      opacity: 1;
+    }
+
+    .area-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: rgba(11, 31, 58, 0.06);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--gold-600);
+      font-size: 1.35rem;
+    }
+
+    .area-card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 0.75rem;
+      color: var(--navy-900);
+    }
+
+    .area-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    /* Differentials */
+    .differentials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .diff-card {
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      position: relative;
+    }
+
+    .diff-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: rgba(201, 162, 39, 0.35);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .diff-card h3 {
+      font-size: 1.15rem;
+      margin: 0 0 0.5rem;
+      color: var(--navy-900);
+    }
+
+    .diff-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Team Section */
+    .team-bg {
+      background-color: #F1F4F8;
+    }
+
+    .team-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(11, 31, 58, 0.06);
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+    }
+
+    .team-badge-col {
+      background: linear-gradient(145deg, #0B1F3A 0%, #102A4C 100%);
+      color: #FFFFFF;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 3px solid var(--gold-500);
+    }
+
+    .team-avatar-box {
+      width: 80px;
+      height: 80px;
+      background: rgba(201, 162, 39, 0.15);
+      border: 2px solid var(--gold-500);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--gold-400);
+      font-size: 2rem;
+    }
+
+    .team-badge-col h3 {
+      color: #FFFFFF;
+      font-size: 1.35rem;
+      margin: 0 0 0.4rem;
+    }
+
+    .team-role {
+      color: var(--gold-400);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .team-contact-link {
+      color: #E2E8F0;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .team-contact-link:hover {
+      color: var(--gold-400);
+    }
+
+    .team-body-col {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .team-body-col p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 1.25rem;
+    }
+
+    .skills-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-pill {
+      background: #F1F5F9;
+      color: #0F172A;
+      border: 1px solid #CBD5E1;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .quote-mark {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--gold-500);
+      font-size: 3.5rem;
+      line-height: 1;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      opacity: 0.25;
+      user-select: none;
+    }
+
+    .testimonial-stars {
+      color: var(--gold-500);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #334155;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      font-style: italic;
+    }
+
+    .client-info {
+      border-top: 1px solid #E2E8F0;
+      padding-top: 1rem;
+    }
+
+    .client-name {
+      font-weight: 700;
+      color: var(--navy-900);
+      font-size: 0.98rem;
+    }
+
+    .client-case {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact Section */
+    .contact-wrap {
+      background: linear-gradient(160deg, #071527 0%, #0B1F3A 70%, #102A4C 100%);
+      color: #FFFFFF;
+      border-top: 3px solid var(--gold-500);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      color: #FFFFFF;
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-left p {
+      color: #CBD5E1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(201, 162, 39, 0.25);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+    }
+
+    .contact-info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(201, 162, 39, 0.15);
+      color: var(--gold-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info-text strong {
+      display: block;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+    }
+
+    .contact-info-text a, .contact-info-text span {
+      color: #CBD5E1;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .contact-info-text a:hover {
+      color: var(--gold-400);
+    }
+
+    /* Contact Form */
+    .contact-form-box {
+      background: #FFFFFF;
+      color: var(--text);
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .contact-form-box h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      color: var(--navy-900);
+    }
+
+    .contact-form-box .form-intro {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: #F8FAFC;
+      color: #0F172A;
+      box-sizing: border-box;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold-600);
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
+      background: #FFFFFF;
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 100%);
+      color: #FFFFFF;
+      border: 1px solid var(--gold-500);
+      padding: 0.8rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit-btn:hover {
+      background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+      color: #0B1F3A;
+      border-color: #DFB93C;
+    }
+
+    .form-alert {
+      display: none;
+      padding: 0.85rem;
+      background: #ECFDF5;
+      border: 1px solid #10B981;
+      color: #065F46;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    /* Rodapé & Emblemas Dourados */
+    .footer-seals-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    }
+
+    .footer-seal-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-seal-img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+      transition: transform 0.25s ease;
+    }
+
+    .footer-seal-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background: #050E1A;
+      color: #94A3B8;
+      padding: 3rem 1.5rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.88rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand h4 {
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .footer-brand p {
+      line-height: 1.6;
+      max-width: 380px;
+      color: #94A3B8;
+    }
+
+    .footer-links-col h5 {
+      color: #FFFFFF;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin: 0 0 1rem;
+    }
+
+    .footer-links-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links-col ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links-col a {
+      color: #94A3B8;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links-col a:hover {
+      color: var(--gold-400);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.82rem;
+    }
+
+    .footer-disclaimer {
+      color: #64748B;
+      font-size: 0.78rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25D366;
+      color: #FFFFFF;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      z-index: 999;
+      text-decoration: none;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-float svg {
+      width: 32px;
+      height: 32px;
+      fill: currentColor;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-content, .about-grid, .exec-grid, .team-card, .contact-grid, .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .team-badge-col {
+        border-right: none;
+        border-bottom: 3px solid var(--gold-500);
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #0B1F3A;
+        padding: 1.5rem;
+        border-bottom: 2px solid var(--gold-500);
+        gap: 1rem;
+        text-align: left;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+    @media print {
+      .site-header, .top-bar, .whatsapp-float, .contact-form-box, .btn-gold, .btn-outline-gold {
+        display: none !important;
+      }
+      body {
+        background: #FFF;
+        color: #000;
+      }
+      .section-wrap {
+        padding: 1.5rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Utility Bar -->
+  <div class="top-bar">
+    <div class="container-wide" style="display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem;">
+      <div>
+        <span>OAB/SP nº 459.587 • Advocacia Estratégica & Humanizada</span>
+      </div>
+      <div>
+        <a href="tel:11960762828">
+          <svg style="vertical-align: middle; margin-right: 4px;" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          (11) 96076-2828
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#inicio" class="brand-logo" title="RBS Advocacia - Dra. Roseli Bispo Advogados">
+        <!-- Logo RBS Advocacia: Estátua da Justiça dourada com texto RBS ADVOCACIA sobre fundo azul-marinho -->
+        <svg class="header-logo-img" viewBox="0 0 260 76" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo RBS Advocacia">
+          <rect width="260" height="76" rx="6" fill="#0B1F3A"/>
+          <rect x="1" y="1" width="258" height="74" rx="5" stroke="#C9A227" stroke-width="1.2" stroke-opacity="0.5"/>
+          <!-- Estátua da Justiça estilizada em Dourado -->
+          <g transform="translate(14, 8)">
+            <!-- Balança e Espada -->
+            <path d="M24 6 C24 3 28 3 28 6 C28 9 24 9 24 6 Z" fill="#DFB93C"/>
+            <!-- Cabeça com venda -->
+            <circle cx="26" cy="11" r="4.5" fill="#C9A227"/>
+            <rect x="22" y="10" width="8" height="2" fill="#0B1F3A"/>
+            <!-- Corpo e túnica -->
+            <path d="M23 16 L29 16 L32 36 L20 36 Z" fill="#DFB93C"/>
+            <path d="M21 36 L31 36 L34 56 L18 56 Z" fill="#B38F1E"/>
+            <!-- Braço esquerdo levantando a balança -->
+            <path d="M28 18 L38 12 L38 14" stroke="#DFB93C" stroke-width="2" stroke-linecap="round"/>
+            <line x1="31" y1="13" x2="45" y2="13" stroke="#DFB93C" stroke-width="1.8"/>
+            <line x1="33" y1="13" x2="31" y2="21" stroke="#DFB93C" stroke-width="1"/>
+            <line x1="33" y1="13" x2="35" y2="21" stroke="#DFB93C" stroke-width="1"/>
+            <path d="M30 21 Q33 24 36 21 Z" fill="#DFB93C"/>
+            <line x1="43" y1="13" x2="41" y2="21" stroke="#DFB93C" stroke-width="1"/>
+            <line x1="43" y1="13" x2="45" y2="21" stroke="#DFB93C" stroke-width="1"/>
+            <path d="M40 21 Q43 24 46 21 Z" fill="#DFB93C"/>
+            <!-- Braço direito com espada erguida -->
+            <path d="M24 18 L16 22 L16 38" stroke="#DFB93C" stroke-width="2" stroke-linecap="round"/>
+            <line x1="13" y1="24" x2="19" y2="24" stroke="#DFB93C" stroke-width="1.8"/>
+            <line x1="16" y1="20" x2="16" y2="44" stroke="#DFB93C" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <!-- Texto RBS ADVOCACIA Dourado -->
+          <text x="74" y="33" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="21" fill="#FFFFFF" letter-spacing="2">RBS</text>
+          <text x="126" y="33" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#C9A227" letter-spacing="3.5">ADVOCACIA</text>
+          <line x1="74" y1="41" x2="242" y2="41" stroke="#C9A227" stroke-width="1" stroke-opacity="0.6"/>
+          <text x="74" y="55" font-family="'Inter', sans-serif" font-weight="500" font-size="8.5" fill="#CBD5E1" letter-spacing="1.2">DRA. ROSELI BISPO • OAB/SP 459.587</text>
+        </svg>
+
+        <div class="brand-text-group">
+          <span class="brand-title">Dra. Roseli Bispo <span class="gold-dot">•</span> Advogados</span>
+          <span class="brand-subtitle">Sociedade Individual de Advocacia</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Abrir Menu">
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#execucoes">Execuções</a></li>
+        <li><a href="#areas">Áreas de Atuação</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato" class="btn-gold">Fale Conosco</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section class="hero-section" id="inicio">
+      <div class="hero-pattern"></div>
+      <div class="hero-content">
+        <div>
+          <div class="hero-tagline">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            Excelência e Rigor Jurídico
+          </div>
+          <h1 class="hero-title">Advocacia séria, atendimento humano</h1>
+          <p class="hero-subtitle">
+            Atuação jurídica multidisciplinar com destaque para Direito Tributário, Imobiliário, Execuções, Civil, Família e Sucessões, Previdenciário e Leilões — assegurando solidez técnica, proteção patrimonial e a tranquilidade que cada cliente merece.
+          </p>
+
+          <div class="hero-focus-badge">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10h2v4h-2zm0 6h2v2h-2z"/></svg>
+            Foco em Direito Tributário, Imobiliário, Execuções, Civil, Família e Sucessões, Previdenciário e Leilões
+          </div>
+
+          <div class="hero-badge-oab">
+            <strong>Dra. Roseli Bispo</strong> — OAB/SP nº 459.587
+          </div>
+
+          <div class="hero-actions">
+            <a href="#contato" class="btn-gold">
+              Agendar consulta
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-7.85-1.42 1.42 5.43 5.43H5v2z"/></svg>
+            </a>
+            <a href="#areas" class="btn-outline-gold">
+              Conhecer áreas de atuação
+            </a>
+          </div>
+        </div>
+
+        <!-- Foto da advogada em pé de blazer preto com moldura elegante dourada -->
+        <div class="hero-photo-container">
+          <div class="lawyer-photo-wrapper">
+            <div class="lawyer-gold-frame">
+              <div class="corner-ornament corner-tl"></div>
+              <div class="corner-ornament corner-tr"></div>
+              <div class="corner-ornament corner-bl"></div>
+              <div class="corner-ornament corner-br"></div>
+              <img 
+                src="https://img.usecurling.com/p/460/600?q=lawyer%20woman%20suit%20document&color=black" 
+                alt="Dra. Roseli Bispo - Advogada Titular em conjunto formal preto com documento"
+                class="lawyer-portrait-img"
+                loading="eager"
+              >
+              <div class="hero-photo-tag">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <span>Dra. Roseli Bispo</span> • OAB/SP 459.587
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Sobre a Advogada -->
+    <section class="section-wrap" id="sobre">
+      <div class="container-wide">
+        <div class="about-grid">
+          <!-- Foto da advogada na seção Sobre, posicionada à esquerda do texto com moldura elegante dourada -->
+          <div class="about-image-card">
+            <div class="lawyer-gold-frame" style="max-width: 440px; margin: 0 auto;">
+              <div class="corner-ornament corner-tl"></div>
+              <div class="corner-ornament corner-tr"></div>
+              <div class="corner-ornament corner-bl"></div>
+              <div class="corner-ornament corner-br"></div>
+              <img 
+                src="https://img.usecurling.com/p/460/600?q=lawyer%20woman%20suit%20document&color=black" 
+                alt="Dra. Roseli Bispo - Advogada Titular" 
+                class="lawyer-portrait-img"
+                loading="lazy"
+              >
+              <div style="background: linear-gradient(135deg, #0B1F3A 0%, #102A4C 100%); padding: 1.25rem; border-top: 1px solid var(--gold-500); border-radius: 0 0 4px 4px; color: #FFFFFF;">
+                <h3 style="color: #FFFFFF; font-size: 1.3rem; margin: 0 0 0.25rem 0;">Dra. Roseli Bispo</h3>
+                <span style="color: var(--gold-400); font-weight: 600; font-size: 0.88rem; display: block; margin-bottom: 0.75rem;">Advogada Titular • OAB/SP nº 459.587</span>
+                <blockquote class="adv-quote" style="margin: 0; font-size: 0.88rem; border-left-color: var(--gold-500);">
+                  "O Direito deve ser um instrumento de pacificação, segurança e dignidade. Exercemos a advocacia com dedicação integral e respeito profundo à história de vida de cada cliente."
+                </blockquote>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text">
+            <span class="section-eyebrow">Sobre a Advogada</span>
+            <h2 class="section-title">Dedicação integral à defesa dos seus interesses</h2>
+            
+            <p>
+              A <strong>Dra. Roseli Bispo</strong>, inscrita na <strong>OAB/SP sob o nº 459.587</strong>, lidera o escritório com uma postura pautada pela ética irrestrita, pelo sigilo profissional e pela busca incessante das soluções jurídicas mais seguras e vantajosas para cada cliente.
+            </p>
+            <p>
+              Atua de forma multidisciplinar, com foco especial em <strong>Direito Tributário</strong>, <strong>Direito Imobiliário</strong>, <strong>Direito das Execuções</strong> (fiscais, judiciais e extrajudiciais), <strong>Direito Civil</strong>, <strong>Direito de Família e Sucessões</strong>, <strong>Direito Previdenciário</strong> e <strong>Leilões</strong> — unindo técnica refinada, visão estratégica combativa e atendimento humanizado.
+            </p>
+            <p>
+              Atua com dedicação integral a cada caso, unindo conhecimento técnico aprofundado e sensibilidade para orientar pessoas e organizações em momentos decisivos. Seja na prevenção de litígios ou no contencioso de alta complexidade, o escritório adota uma visão estratégica em todas as fases do processo, garantindo clareza e previsibilidade aos clientes.
+            </p>
+
+            <div class="values-grid">
+              <div class="value-item">
+                <h4>
+                  <svg width="18" height="18" fill="var(--gold-600)" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10h2v4h-2zm0 6h2v2h-2z"/></svg>
+                  Ética Inegociável
+                </h4>
+                <p>Conduta íntegra, observância rigorosa do sigilo e respeito irrestrito às normas deontológicas da advocacia.</p>
+              </div>
+
+              <div class="value-item">
+                <h4>
+                  <svg width="18" height="18" fill="var(--gold-600)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                  Compromisso
+                </h4>
+                <p>Acompanhamento próximo de cada desdobramento processual com atualização constante e zelo minucioso.</p>
+              </div>
+
+              <div class="value-item">
+                <h4>
+                  <svg width="18" height="18" fill="var(--gold-600)" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                  Transparência
+                </h4>
+                <p>Comunicação franca sobre riscos, cenários e estratégias, sem termos inacessíveis ou promessas irreais.</p>
+              </div>
+
+              <div class="value-item">
+                <h4>
+                  <svg width="18" height="18" fill="var(--gold-600)" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  Atendimento Humano
+                </h4>
+                <p>Escuta atenta para acolher as angústias reais do cliente, oferecendo serenidade e segurança jurídica.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.1 Especialidade em Direito das Execuções (Seção Dedicada) -->
+    <section class="section-wrap specialty-section" id="execucoes">
+      <div class="container-wide">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Área de Foco Principal</span>
+          <h2 class="section-title">Especialidade em Direito das Execuções</h2>
+          <p class="section-subtitle">
+            O escritório atua nas três frentes — execução fiscal, execução judicial e execução extrajudicial —, tanto para credores quanto para devedores, com rigor ético, transparência e máxima estratégia jurídica para a salvaguarda de direitos e patrimônio.
+          </p>
+        </div>
+
+        <div class="exec-grid">
+          <!-- Card 1: Execução Fiscal -->
+          <div class="exec-card">
+            <div class="exec-card-header">
+              <div class="exec-icon">
+                <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="exec-badge-pill">Fisco & Contencioso</span>
+                <h3>Execução Fiscal</h3>
+              </div>
+            </div>
+            <p>
+              Defesa e atuação em execuções fiscais, embargos, exceção de pré-executividade, parcelamentos e estratégias para redução de passivos tributários.
+            </p>
+            <ul class="exec-highlights-list">
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Defesa especializada em execuções fiscais federais, estaduais e municipais
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Exceção de pré-executividade e embargos à execução fiscal
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Adesão a parcelamentos especiais e transação tributária
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Estratégias para suspensão de exigibilidade e desbloqueio de bens
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Execução Judicial -->
+          <div class="exec-card">
+            <div class="exec-card-header">
+              <div class="exec-icon">
+                <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                </svg>
+              </div>
+              <div>
+                <span class="exec-badge-pill">Via Jurisdicional</span>
+                <h3>Execução Judicial</h3>
+              </div>
+            </div>
+            <p>
+              Cumprimento de sentença, execução de título judicial, penhora e expropriação de bens, embargos à execução e impugnações — atuação técnica para a efetiva satisfação do crédito.
+            </p>
+            <ul class="exec-highlights-list">
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Cumprimento de sentença e execução de títulos judiciais
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Pesquisa patrimonial qualificada e medidas de penhora de bens
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Expropriação de bens, leilão e arrematação judicial
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Embargos à execução e impugnações com foco em proteção patrimonial
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Execução Extrajudicial -->
+          <div class="exec-card">
+            <div class="exec-card-header">
+              <div class="exec-icon">
+                <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="exec-badge-pill">Via Administrativa & Notarial</span>
+                <h3>Execução Extrajudicial</h3>
+              </div>
+            </div>
+            <p>
+              Execução de títulos extrajudiciais (contratos, notas promissórias, cheques, duplicatas) e garantias imobiliárias, como alienação fiduciária e hipoteca — soluções ágeis e seguras.
+            </p>
+            <ul class="exec-highlights-list">
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Execução de contratos, cheques, notas promissórias e duplicatas
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Procedimentos de alienação fiduciária de bens móveis e imóveis
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Execução e consolidação de garantias perante cartórios de registro
+              </li>
+              <li>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Composições e acordos extrajudiciais seguros e céleres
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Áreas de Atuação -->
+    <section class="section-wrap areas-bg" id="areas">
+      <div class="container-wide">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Especialidades</span>
+          <h2 class="section-title">Áreas de Atuação</h2>
+          <p class="section-subtitle">
+            Soluções jurídicas personalizadas para proteger seu patrimônio, resguardar sua família e dar sustentação ao seu negócio.
+          </p>
+        </div>
+
+        <div class="areas-grid">
+          <!-- 1. Direito Tributário -->
+          <div class="area-card">
+            <div class="area-icon-wrap">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/></svg>
+            </div>
+            <h3>Direito Tributário</h3>
+            <p>planejamento tributário, contencioso administrativo e judicial, defesa em execuções fiscais, parcelamentos e recuperação de créditos tributários.</p>
+          </div>
+
+          <!-- 2. Direito Imobiliário -->
+          <div class="area-card">
+            <div class="area-icon-wrap">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <h3>Direito Imobiliário</h3>
+            <p>compra e venda de imóveis, contratos imobiliários, regularização de matrícula, incorporação imobiliária, locação e usucapião.</p>
+          </div>
+
+          <!-- 3. Direito das Execuções -->
+          <div class="area-card" style="border-color: rgba(201, 162, 39, 0.45); background: #FAF9F5;">
+            <div class="area-icon-wrap" style="background: rgba(201, 162, 39, 0.18); color: var(--gold-600);">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem;">
+              <h3 style="margin: 0;">Direito das Execuções</h3>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #0B1F3A; background: var(--gold-400); padding: 2px 7px; border-radius: 4px; text-transform: uppercase;">Destaque</span>
+            </div>
+            <p>execução fiscal, cumprimento de sentença, execução de títulos judiciais e extrajudiciais, penhora e expropriação de bens, embargos à execução e exceção de pré-executividade.</p>
+          </div>
+
+          <!-- 4. Direito Civil -->
+          <div class="area-card">
+            <div class="area-icon-wrap">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            </div>
+            <h3>Direito Civil</h3>
+            <p>contratos, responsabilidade civil, obrigações, indenizações, direito das coisas e relações civis em geral.</p>
+          </div>
+
+          <!-- 5. Direito de Família e Sucessões -->
+          <div class="area-card">
+            <div class="area-icon-wrap">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            </div>
+            <h3>Direito de Família e Sucessões</h3>
+            <p>divórcio, guarda, pensão alimentícia, inventário, partilha, planejamento sucessório e testamentos — com acolhimento e sigilo.</p>
+          </div>
+
+          <!-- 6. Direito Previdenciário -->
+          <div class="area-card">
+            <div class="area-icon-wrap">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h3>Direito Previdenciário</h3>
+            <p>aposentadorias, benefícios do INSS, revisões, auxílios e defesa em processos administrativos e judiciais.</p>
+          </div>
+
+          <!-- 7. Leilões -->
+          <div class="area-card">
+            <div class="area-icon-wrap">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3>Leilões</h3>
+            <p>assessoria completa em leilões judiciais e extrajudiciais, análise de editais, avaliação de viabilidade, habilitação e arrematação de bens com segurança jurídica.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Diferenciais -->
+    <section class="section-wrap" id="diferenciais">
+      <div class="container-wide">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Nossos Pilares</span>
+          <h2 class="section-title">Por que escolher nosso escritório</h2>
+          <p class="section-subtitle">
+            Combinamos solidez técnica com dedicação genuína para construir relações duradouras e resultados efetivos.
+          </p>
+        </div>
+
+        <div class="differentials-grid">
+          <div class="diff-card">
+            <div class="diff-number">01</div>
+            <h3>Assessoria Jurídica Estratégica</h3>
+            <p>Atuação jurídica multidisciplinar com profundidade analítica e especialidade sólida em execuções fiscais, judiciais e extrajudiciais, oferecendo soluções sob medida para a satisfação efetiva de créditos e a proteção patrimonial dos nossos clientes.</p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-number">02</div>
+            <h3>Atendimento Humanizado</h3>
+            <p>Praticamos escuta ativa e diálogo acolhedor. Mantemos você informado com linguagem clara, sem termos herméticos que geram ansiedade.</p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-number">03</div>
+            <h3>Compromisso com Resultados</h3>
+            <p>Foco irrestrito nos melhores interesses do cliente, seja na via extrajudicial rápida ou na defesa aguerrida perante os tribunais.</p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-number">04</div>
+            <h3>Sigilo e Ética Profissional</h3>
+            <p>Proteção rigorosa de informações confidenciais, integridade intransigente e cumprimento pontual dos preceitos da advocacia brasileira.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Equipe -->
+    <section class="section-wrap team-bg" id="equipe">
+      <div class="container-wide">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Corpo Jurídico</span>
+          <h2 class="section-title">Nossa Equipe</h2>
+          <p class="section-subtitle">
+            Profissionais qualificados e multidisciplinares comprometidos com o suporte integral aos nossos clientes.
+          </p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-badge-col">
+            <div class="team-avatar-box">
+              <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <h3>Carlos Henrique Petrovich Bagatim</h3>
+            <span class="team-role">Bacharel em Direito | Assistente Jurídico Paralegal</span>
+            
+            <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.15);">
+              <a href="tel:11988807576" class="team-contact-link">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                (11) 98880-7576
+              </a>
+              <a href="mailto:carlosbagatim@gmail.com" class="team-contact-link">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                carlosbagatim@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div class="team-body-col">
+            <p>
+              Graduado em Direito, possui especializações <em>lato sensu</em> em <strong>Direito Imobiliário</strong>, <strong>Direito Processual Civil</strong> e <strong>Direito Ambiental</strong>, além de sólida formação acadêmica em Filosofia e Letras (Língua Portuguesa) e graduação em andamento em Letras (Espanhol).
+            </p>
+            <p>
+              Atua no escritório <strong>Dra. Roseli Bispo Advogados</strong> prestando suporte técnico-jurídico e administrativo sob supervisão, no acompanhamento processual minucioso, elaboração de minutas e pesquisa jurisprudencial qualificada.
+            </p>
+            <p>
+              Com fluência em <strong>Espanhol</strong> e <strong>Italiano</strong>, atua diretamente no suporte e atendimento a clientes no Brasil e em toda a América Latina, assegurando uma ponte de comunicação precisa e acolhedora em demandas transnacionais.
+            </p>
+
+            <div style="margin-top: 1rem;">
+              <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--navy-900); display: block; margin-bottom: 0.5rem;">Competências & Especialidades:</span>
+              <div class="skills-pills">
+                <span class="skill-pill">Direito Imobiliário</span>
+                <span class="skill-pill">Processo Civil</span>
+                <span class="skill-pill">Direito Ambiental</span>
+                <span class="skill-pill">Pesquisa Jurisprudencial</span>
+                <span class="skill-pill">Fluente em Espanhol</span>
+                <span class="skill-pill">Fluente em Italiano</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Depoimentos -->
+    <section class="section-wrap" id="depoimentos">
+      <div class="container-wide">
+        <div class="section-header-center">
+          <span class="section-eyebrow">Reconhecimento</span>
+          <h2 class="section-title">Depoimentos de clientes</h2>
+          <p class="section-subtitle">
+            A opinião de quem confiou suas causas mais delicadas ao escritório Dra. Roseli Bispo Advogados.
+          </p>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Helena Machado (Obrigatório ser o primeiro) -->
+          <div class="testimonial-card">
+            <div class="quote-mark">“</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "A Dra. Roseli Bispo me acolheu em um momento extremamente difícil de partilha e divórcio. O que mais me impressionou foi a serenidade e a clareza com que cada etapa me foi explicada. Tive a certeza de que meus direitos estavam em mãos responsáveis e humanas. Recomendo de olhos fechados."
+            </p>
+            <div class="client-info">
+              <div class="client-name">Helena Machado</div>
+              <div class="client-case">Direito de Família & Sucessões • São Paulo/SP</div>
+            </div>
+          </div>
+
+          <!-- Marcos Antônio Silva -->
+          <div class="testimonial-card">
+            <div class="quote-mark">“</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "Buscamos a assessoria do escritório para revisar nossos contratos societários e negociar pendências bancárias que vinham sufocando a empresa. A atuação foi rápida, extremamente estratégica e evitou um prejuízo enorme. Profissionalismo de altíssimo nível."
+            </p>
+            <div class="client-info">
+              <div class="client-name">Marcos Antônio Silva</div>
+              <div class="client-case">Empresarial e Bancário • Campinas/SP</div>
+            </div>
+          </div>
+
+          <!-- Patrícia Oliveira -->
+          <div class="testimonial-card">
+            <div class="quote-mark">“</div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "O atendimento prestado pela Dra. Roseli e por sua equipe é impecável. Sempre prestativos no WhatsApp, respondem com rapidez e demonstram profundo domínio da causa. Consegui minha revisão com total tranquilidade e segurança."
+            </p>
+            <div class="client-info">
+              <div class="client-name">Patrícia Oliveira</div>
+              <div class="client-case">Direito Previdenciário • Santo André/SP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contato -->
+    <section class="section-wrap contact-wrap" id="contato">
+      <div class="container-wide">
+        <div class="contact-grid">
+          <div class="contact-left">
+            <span class="section-eyebrow" style="color: var(--gold-400);">Atendimento Personalizado</span>
+            <h2>Entre em contato — Presentes quando mais importa</h2>
+            <p>
+              Abordamos cada caso com cuidado, clareza e um foco preciso nos seus melhores interesses. Nossa equipe está aqui para orientar, apoiar e entregar resultados em cada etapa do processo.
+            </p>
+
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <div class="contact-info-icon">
+                  <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 2.17.7 4.19 1.94 5.86L2.87 22l4.27-1.12C8.74 21.57 10.32 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2V11h2v5.5zm0-7.5h-2V7h2v2z"/></svg>
+                </div>
+                <div class="contact-info-text">
+                  <strong>Telefone e WhatsApp Oficial</strong>
+                  <a href="https://wa.me/5511960762828" target="_blank" rel="noopener noreferrer" style="font-weight: 600; font-size: 1.15rem; color: var(--gold-400);">
+                    (11) 96076-2828
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="contact-info-icon">
+                  <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <div class="contact-info-text">
+                  <strong>Inscrição OAB</strong>
+                  <span>OAB/SP nº 459.587 — Atendimento presencial e digital em todo o Brasil</span>
+                </div>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="contact-info-icon">
+                  <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                </div>
+                <div class="contact-info-text">
+                  <strong>Horário de Atendimento</strong>
+                  <span>Segunda a Sexta-feira, das 09h às 18h (Plantão mediante agendamento)</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <a href="https://wa.me/5511960762828" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 0.85rem 1.75rem; font-size: 1.05rem;">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                Iniciar conversa no WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Form Visual Elegante -->
+          <div class="contact-form-box">
+            <h3>Envie uma Mensagem</h3>
+            <p class="form-intro">Preencha o formulário abaixo para solicitar uma análise preliminar ou agendar uma reunião com nossa equipe.</p>
+            
+            <form id="contactForm" onsubmit="handleFormSubmit(event)">
+              <div class="form-group">
+                <label for="nome">Nome Completo *</label>
+                <input type="text" id="nome" class="form-control" required placeholder="Ex.: Helena Machado">
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" class="form-control" required placeholder="seuemail@exemplo.com">
+              </div>
+
+              <div class="form-group">
+                <label for="telefone">Telefone / WhatsApp *</label>
+                <input type="tel" id="telefone" class="form-control" required placeholder="(11) 90000-0000">
+              </div>
+
+              <div class="form-group">
+                <label for="area">Área de Interesse</label>
+                <select id="area" class="form-control">
+                  <option value="">Selecione uma especialidade...</option>
+                  <option value="tributario">Direito Tributário</option>
+                  <option value="imobiliario">Direito Imobiliário</option>
+                  <option value="execucoes" selected>Direito das Execuções (Fiscais, Judiciais e Extrajudiciais)</option>
+                  <option value="civil">Direito Civil</option>
+                  <option value="familia_sucessoes">Direito de Família e Sucessões</option>
+                  <option value="previdenciario">Direito Previdenciário</option>
+                  <option value="leiloes">Leilões (Judiciais e Extrajudiciais)</option>
+                  <option value="outro">Outro assunto</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mensagem">Mensagem / Resumo do Caso *</label>
+                <textarea id="mensagem" rows="4" class="form-control" required placeholder="Descreva brevemente sua situação para podermos direcionar o atendimento..."></textarea>
+              </div>
+
+              <button type="submit" class="form-submit-btn">
+                Enviar Mensagem
+              </button>
+
+              <div id="formSuccessAlert" class="form-alert" role="alert">
+                <strong>Mensagem registrada com sucesso!</strong> Entraremos em contato em breve pelo número ou e-mail fornecido.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="site-footer">
+    <div class="container-wide" style="padding: 0 1.5rem;">
+      <!-- Selo Dourado RBS Advocacia e Emblema Circular Dourado RBS Advocacia -->
+      <div class="footer-seals-row">
+        <!-- 1. Selo / Medalhão Dourado Circular RBS Advocacia -->
+        <div class="footer-seal-item" title="Selo Dourado Oficial RBS Advocacia">
+          <svg class="footer-seal-img" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Selo Dourado RBS Advocacia">
+            <defs>
+              <radialGradient id="goldMedalGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFF2A3"/>
+                <stop offset="45%" stop-color="#DFB93C"/>
+                <stop offset="85%" stop-color="#C9A227"/>
+                <stop offset="100%" stop-color="#8C6E15"/>
+              </radialGradient>
+              <linearGradient id="goldRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#DFB93C"/>
+                <stop offset="50%" stop-color="#8C6E15"/>
+                <stop offset="100%" stop-color="#C9A227"/>
+              </linearGradient>
+            </defs>
+            <!-- Fita e denteado exterior do medalhão -->
+            <circle cx="60" cy="60" r="56" fill="url(#goldRingGrad)" stroke="#DFB93C" stroke-width="2"/>
+            <circle cx="60" cy="60" r="50" fill="#0B1F3A" stroke="#DFB93C" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <circle cx="60" cy="60" r="44" fill="url(#goldMedalGrad)"/>
+            <circle cx="60" cy="60" r="39" fill="#0B1F3A"/>
+            <!-- Estátua da justiça / balança interna -->
+            <path d="M60 27 L60 48 M51 33 L69 33 M53 33 L49 41 Q53 43 57 41 Z M67 33 L63 41 Q67 43 71 41 Z" stroke="#DFB93C" stroke-width="1.5" fill="#DFB93C"/>
+            <!-- Textos no selo -->
+            <text x="60" y="59" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">RBS</text>
+            <text x="60" y="69" font-family="'Inter', sans-serif" font-weight="700" font-size="6" fill="#DFB93C" text-anchor="middle" letter-spacing="2">ADVOCACIA</text>
+            <text x="60" y="78" font-family="'Inter', sans-serif" font-weight="600" font-size="5" fill="#CBD5E1" text-anchor="middle" letter-spacing="0.5">EXCELÊNCIA JURÍDICA</text>
+            <!-- Estrelas de qualidade -->
+            <text x="60" y="86" font-size="7" fill="#DFB93C" text-anchor="middle">★★★★★</text>
+          </svg>
+          <span style="font-size: 0.72rem; color: var(--gold-400); margin-top: 4px; font-weight: 600; letter-spacing: 0.5px;">Selo de Garantia RBS</span>
+        </div>
+
+        <!-- 2. Emblema Circular Dourado RBS Advocacia com Louros -->
+        <div class="footer-seal-item" title="Emblema Circular Dourado RBS Advocacia">
+          <svg class="footer-seal-img" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Emblema Circular Dourado RBS Advocacia">
+            <defs>
+              <linearGradient id="goldLaurelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE57F"/>
+                <stop offset="50%" stop-color="#C9A227"/>
+                <stop offset="100%" stop-color="#8C6E15"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="56" fill="#071527" stroke="url(#goldLaurelGrad)" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="51" fill="none" stroke="#C9A227" stroke-width="1" stroke-opacity="0.6"/>
+            <!-- Coroa de louros dourada estilizada -->
+            <g stroke="#DFB93C" stroke-width="1.2" fill="#C9A227" opacity="0.9">
+              <!-- Ramo esquerdo -->
+              <path d="M30 75 C25 60 25 45 35 32 C33 40 35 48 40 55 C37 62 35 68 30 75 Z"/>
+              <circle cx="28" cy="40" r="2.5" fill="#DFB93C"/>
+              <circle cx="26" cy="50" r="2.5" fill="#DFB93C"/>
+              <circle cx="28" cy="60" r="2.5" fill="#DFB93C"/>
+              <!-- Ramo direito -->
+              <path d="M90 75 C95 60 95 45 85 32 C87 40 85 48 80 55 C83 62 85 68 90 75 Z"/>
+              <circle cx="92" cy="40" r="2.5" fill="#DFB93C"/>
+              <circle cx="94" cy="50" r="2.5" fill="#DFB93C"/>
+              <circle cx="92" cy="60" r="2.5" fill="#DFB93C"/>
+            </g>
+            <!-- Centro: Monograma e título -->
+            <circle cx="60" cy="60" r="32" fill="#0B1F3A" stroke="#DFB93C" stroke-width="1.2"/>
+            <text x="60" y="54" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">RBS</text>
+            <line x1="42" y1="58" x2="78" y2="58" stroke="#DFB93C" stroke-width="1"/>
+            <text x="60" y="68" font-family="'Inter', sans-serif" font-weight="700" font-size="7" fill="#DFB93C" text-anchor="middle" letter-spacing="1.5">ADVOCACIA</text>
+            <text x="60" y="78" font-family="'Inter', sans-serif" font-weight="500" font-size="5.5" fill="#CBD5E1" text-anchor="middle">OAB/SP 459.587</text>
+          </svg>
+          <span style="font-size: 0.72rem; color: var(--gold-400); margin-top: 4px; font-weight: 600; letter-spacing: 0.5px;">Emblema Institucional</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h4>Dra. Roseli Bispo Advogados</h4>
+        <p>
+          Atuação ética, estratégica e humanizada na defesa intransigente dos direitos e do patrimônio de nossos clientes.
+        </p>
+        <p style="color: var(--gold-400); font-weight: 600; margin-top: 0.5rem;">
+          OAB/SP nº 459.587
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Navegação Rápida</h5>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre a Advogada</a></li>
+          <li><a href="#execucoes">Direito das Execuções</a></li>
+          <li><a href="#areas">Áreas de Atuação</a></li>
+          <li><a href="#diferenciais">Diferenciais</a></li>
+          <li><a href="#equipe">Equipe</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contato">Fale Conosco</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h5>Canais de Atendimento</h5>
+        <ul>
+          <li>Telefone: <a href="tel:11960762828">(11) 96076-2828</a></li>
+          <li>WhatsApp: <a href="https://wa.me/5511960762828" target="_blank" rel="noopener noreferrer">(11) 96076-2828</a></li>
+          <li>Paralegal: <a href="tel:11988807576">(11) 98880-7576</a></li>
+          <li style="margin-top: 0.75rem;">Atendimento em todo o território nacional e América Latina.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        &copy; 2026 Dra. Roseli Bispo Advogados — Todos os direitos reservados.
+      </div>
+      <div>
+        OAB/SP nº 459.587
+      </div>
+    </div>
+    <div class="container-wide" style="padding: 0 1.5rem;">
+      <p class="footer-disclaimer">
+        Aviso Legal: As informações contidas neste website têm caráter puramente informativo e institucional, em consonância com o Código de Ética e Disciplina da OAB. Não configuram aconselhamento jurídico ou promessa formal de resultado. Para orientações específicas a um caso concreto, consulte diretamente nossos advogados.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp CTA -->
+  <a href="https://wa.me/5511960762828" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale pelo WhatsApp">
+    <svg viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Toggle Mobile Navigation
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+        });
+
+        // Close menu upon navigation click
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+          });
+        });
+      }
+    });
+
+    // Handle Contact Form Submission Visually
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const alertBox = document.getElementById('formSuccessAlert');
+      const form = document.getElementById('contactForm');
+      
+      if (alertBox) {
+        alertBox.style.display = 'block';
+        alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      form.reset();
+
+      setTimeout(() => {
+        if (alertBox) {
+          alertBox.style.display = 'none';
+        }
+      }, 7000);
+    }
+  </script>
+<script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+})();
+
+</script>
+</body>
+</html>
