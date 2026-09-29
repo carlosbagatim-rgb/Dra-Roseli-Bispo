@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RBS ADVOCACIA | Dra. Roseli Bispo</title>
+  <title>RBS ADVOCACIA | Dra. Roseli Bispo - OAB/SP 459.587</title>
   <style>
     /* VARIÁVEIS E ESTILOS BASE */
     :root {
@@ -68,18 +68,27 @@
     }
 
     .brand-logo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-logo .title {
       font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       color: var(--gold-400);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    }
+
+    .brand-logo .oab-badge {
+      font-size: 0.75rem;
+      color: #a0aec0;
+      letter-spacing: 0.5px;
     }
 
     .nav-links {
       display: flex;
       gap: 1.5rem;
+      align-items: center;
     }
 
     .nav-links a {
@@ -115,9 +124,16 @@
 
     .hero h1 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       color: var(--gold-400);
       letter-spacing: 1px;
+    }
+
+    .hero .hero-oab {
+      font-size: 1rem;
+      color: var(--gold-100);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
     }
 
     .hero p {
@@ -388,8 +404,15 @@
 
     .footer-brand h4 {
       color: var(--gold-400);
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       font-size: 1.2rem;
+    }
+
+    .footer-brand .oab-info {
+      color: var(--gold-100);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: block;
     }
 
     .footer-links-col h5 {
@@ -487,7 +510,8 @@
   <header class="header-nav">
     <div class="nav-container">
       <div class="brand-logo">
-        <span>RBS ADVOCACIA</span>
+        <span class="title">RBS ADVOCACIA</span>
+        <span class="oab-badge">OAB/SP nº 459.587</span>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
       <nav class="nav-links" id="navLinks">
@@ -506,8 +530,9 @@
     <section class="hero" id="inicio">
       <div class="hero-content">
         <h1>RBS ADVOCACIA</h1>
+        <div class="hero-oab">Dra. Roseli Bispo • OAB/SP nº 459.587</div>
         <p>Atuação especializada no Contencioso Complexo, Direito Tributário, Execuções e Defesa Patrimonial com rigor técnico e ética.</p>
-        <a href="https://wa.me/5511960762828" class="btn-gold" target="_blank" rel="noopener noreferrer">Agende uma Consulta Jurídica</a>
+        <a href="https://api.whatsapp.com/send?phone=5511960762828" class="btn-gold" target="_blank" rel="noopener noreferrer">Agende uma Consulta Jurídica</a>
       </div>
     </section>
 
@@ -515,8 +540,8 @@
     <section class="section-wrap" id="sobre">
       <div class="container-wide">
         <div class="section-header-center">
-          <span class="section-eyebrow">Sobre a Dra. Roseli Bispo</span>
-          <h2 class="section-title">Soluções Jurídicas Personalizadas</h2>
+          <span class="section-eyebrow">Sobre a Advogada</span>
+          <h2 class="section-title">Dra. Roseli Bispo (OAB/SP 459.587)</h2>
           <p class="section-subtitle">
             Com sólida formação e compromisso ético, oferecemos consultoria e patrocínio de causas com foco na proteção dos seus direitos e segurança patrimonial.
           </p>
@@ -640,7 +665,7 @@
                 </div>
                 <div class="contact-info-text">
                   <strong>WhatsApp Directo:</strong>
-                  <a href="https://wa.me/5511960762828" target="_blank" rel="noopener noreferrer">(11) 96076-2828</a>
+                  <a href="https://api.whatsapp.com/send?phone=5511960762828" target="_blank" rel="noopener noreferrer">(11) 96076-2828</a>
                 </div>
               </div>
 
@@ -718,7 +743,8 @@
     <div class="footer-container">
       <div class="footer-brand">
         <h4>RBS ADVOCACIA</h4>
-        <p>Dra. Roseli Bispo • Advocacia e Consultoria Jurídica. Atuação pautada na ética, na excelência técnica e no compromisso rigoroso com a defesa dos direitos dos nossos clientes.</p>
+        <span class="oab-info">Dra. Roseli Bispo • OAB/SP nº 459.587</span>
+        <p>Sociedade Individual de Advocacia. Atuação pautada na ética, na excelência técnica e no compromisso rigoroso com a defesa dos direitos dos nossos clientes.</p>
       </div>
 
       <div class="footer-links-col">
@@ -746,7 +772,7 @@
 
     <div class="footer-bottom">
       <div>
-        © 2026 RBS ADVOCACIA. Todos os direitos reservados.
+        © 2026 RBS ADVOCACIA • OAB/SP nº 459.587. Todos os direitos reservados.
       </div>
       <div class="footer-disclaimer">
         Este site possui caráter estritamente informativo e atende aos ditames do Código de Ética e Disciplina da OAB.
@@ -754,8 +780,8 @@
     </div>
   </footer>
 
-  <!-- Botão Flutuante de Contacto / WhatsApp com o número correto -->
-  <a href="https://wa.me/5511960762828" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Atendimento via WhatsApp">
+  <!-- Botão Flutuante do WhatsApp -->
+  <a href="https://api.whatsapp.com/send?phone=5511960762828" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Atendimento via WhatsApp">
     <svg viewBox="0 0 32 32">
       <path d="M16 2a13.94 13.94 0 0 0-12 21.12L2 30l7.12-1.87A13.94 13.94 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.88-1.61l-.42-.25-4.36 1.14 1.16-4.25-.27-.44A11.51 11.51 0 1 1 16 27.5zm6.31-8.62c-.35-.17-2.06-1.02-2.38-1.14s-.55-.17-.79.17-.92 1.14-1.13 1.38-.42.27-.77.1a9.7 9.7 0 0 1-2.85-1.76 10.7 10.7 0 0 1-1.98-2.46c-.2-.35 0-.54.17-.71.16-.16.35-.42.53-.63s.24-.35.36-.59.06-.44-.03-.61-.79-1.91-1.08-2.61c-.28-.68-.57-.59-.79-.6s-.45-.01-.69-.01a1.33 1.33 0 0 0-.96.45 4 4 0 0 0-1.25 2.97 6.96 6.96 0 0 0 1.46 3.69 15.93 15.93 0 0 0 6.1 5.39c2.31.91 3.22.95 4.37.78a3.72 3.72 0 0 0 2.45-1.73 3 3 0 0 0 .21-1.73c-.09-.16-.34-.26-.69-.43z"/>
     </svg>
