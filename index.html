@@ -1,807 +1,829 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RBS ADVOCACIA | Dra. Roseli Bispo - OAB/SP 459.587</title>
-  <style>
-    /* VARIÁVEIS E ESTILOS BASE */
-    :root {
-      --navy-900: #0a1128;
-      --navy-800: #1c2541;
-      --navy-700: #273469;
-      --gold-500: #c5a059;
-      --gold-400: #d4af37;
-      --gold-100: #f4ebd9;
-      --bg-light: #f8f9fa;
-      --bg-card: #ffffff;
-      --text-dark: #212529;
-      --text-muted: #6c757d;
-      --text-light: #f8f9fa;
-      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-main);
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    /* NAVEGAÇÃO / CABEÇALHO */
-    .header-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: var(--navy-900);
-      color: var(--text-light);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      border-bottom: 2px solid var(--gold-500);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-    }
-
-    .brand-logo {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-logo .title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: var(--gold-400);
-    }
-
-    .brand-logo .oab-badge {
-      font-size: 0.75rem;
-      color: #a0aec0;
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-size: 0.95rem;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold-400);
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-light);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* BANNER PRINCIPAL (HERO) */
-    .hero {
-      background: linear-gradient(rgba(10, 17, 40, 0.88), rgba(10, 17, 40, 0.88)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-      color: var(--text-light);
-      padding: 6rem 1.5rem;
-      text-align: center;
-    }
-
-    .hero-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--gold-400);
-      letter-spacing: 1px;
-    }
-
-    .hero .hero-oab {
-      font-size: 1rem;
-      color: var(--gold-100);
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: #e0e0e0;
-    }
-
-    .btn-gold {
-      display: inline-block;
-      background-color: var(--gold-500);
-      color: var(--navy-900);
-      padding: 0.85rem 2.2rem;
-      border-radius: 4px;
-      font-weight: 700;
-      transition: background-color 0.3s;
-    }
-
-    .btn-gold:hover {
-      background-color: var(--gold-400);
-    }
-
-    /* SECÇÕES & SEPARADORES */
-    .section-wrap {
-      padding: 5rem 1.5rem;
-    }
-
-    .container-wide {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-header-center {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-eyebrow {
-      display: block;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--gold-500);
-      margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      color: var(--navy-900);
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* GRELHA & CARTÕES DE SERVIÇO */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background-color: var(--bg-card);
-      border: 1px solid #e9ecef;
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    }
-
-    .card h3 {
-      color: var(--navy-900);
-      margin-bottom: 0.8rem;
-    }
-
-    /* DEPOIMENTOS */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .testimonial-card {
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: 8px;
-      border-left: 4px solid var(--gold-500);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      position: relative;
-    }
-
-    .quote-mark {
-      font-size: 3rem;
-      color: var(--gold-100);
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-family: Georgia, serif;
-    }
-
-    .testimonial-stars {
-      color: var(--gold-400);
-      margin-bottom: 1rem;
-    }
-
-    .testimonial-text {
-      font-style: italic;
-      color: var(--text-dark);
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .client-name {
-      font-weight: 700;
-      color: var(--navy-900);
-    }
-
-    .client-case {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* SECÇÃO DE CONTACTO */
-    .contact-wrap {
-      background-color: var(--navy-900);
-      color: var(--text-light);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .contact-left h2 {
-      font-size: 2rem;
-      margin: 1rem 0;
-      color: var(--gold-400);
-    }
-
-    .contact-info-list {
-      margin-top: 2rem;
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-info-icon {
-      color: var(--gold-400);
-      margin-top: 3px;
-    }
-
-    .contact-info-text strong {
-      display: block;
-      color: #ffffff;
-    }
-
-    .contact-info-text a, .contact-info-text span {
-      color: #d1d5db;
-    }
-
-    .contact-info-text a:hover {
-      color: var(--gold-400);
-    }
-
-    .contact-form-box {
-      background-color: var(--navy-800);
-      padding: 2.5rem;
-      border-radius: 8px;
-      border: 1px solid rgba(197, 160, 89, 0.2);
-    }
-
-    .contact-form-box h3 {
-      margin-bottom: 0.5rem;
-      color: var(--gold-400);
-    }
-
-    .form-intro {
-      font-size: 0.9rem;
-      color: #adb5bd;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-size: 0.9rem;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #495057;
-      border-radius: 4px;
-      background-color: var(--navy-900);
-      color: var(--text-light);
-      font-family: inherit;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--gold-400);
-    }
-
-    .form-submit-btn {
-      width: 100%;
-      padding: 0.8rem;
-      background-color: var(--gold-500);
-      color: var(--navy-900);
-      border: none;
-      border-radius: 4px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .form-submit-btn:hover {
-      background-color: var(--gold-400);
-    }
-
-    .form-alert {
-      display: none;
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background-color: #d4edda;
-      color: #155724;
-      border-radius: 4px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    /* RODAPÉ */
-    .site-footer {
-      background-color: #050814;
-      color: #adb5bd;
-      padding: 4rem 1.5rem 2rem;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(197, 160, 89, 0.2);
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-brand h4 {
-      color: var(--gold-400);
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .footer-brand .oab-info {
-      color: var(--gold-100);
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .footer-links-col h5 {
-      color: var(--text-light);
-      margin-bottom: 1rem;
-    }
-
-    .footer-links-col ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-links-col a:hover {
-      color: var(--gold-400);
-    }
-
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 2rem;
-      border-top: 1px solid #212529;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-disclaimer {
-      font-size: 0.8rem;
-      color: #6c757d;
-    }
-
-    /* BOTÃO FLUTUANTE DE CONTACTO / WHATSAPP */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 60px;
-      height: 60px;
-      background-color: #25d366;
-      color: #fff;
-      border-radius: 50px;
-      text-align: center;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.08);
-    }
-
-    .whatsapp-float svg {
-      width: 32px;
-      height: 32px;
-      fill: #fff;
-    }
-
-    /* DESIGN RESPONSIVO */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--navy-900);
-        padding: 1.5rem;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-container {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>RBS ADVOCACIA | Dra. Roseli Bispo - OAB/SP 459.587</title>
+ <style>
+ /* VARIÁVEIS E ESTILOS BASE */
+ :root {
+ --navy-900: #0a1128;
+ --navy-800: #1c2541;
+ --navy-700: #273469;
+ --gold-500: #c5a059;
+ --gold-400: #d4af37;
+ --gold-100: #f4ebd9;
+ --bg-light: #f8f9fa;
+ --bg-card: #ffffff;
+ --text-dark: #212529;
+ --text-muted: #6c757d;
+ --text-light: #f8f9fa;
+ --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+ }
+
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
+
+ html {
+ scroll-behavior: smooth;
+ }
+
+ body {
+ font-family: var(--font-main);
+ background-color: var(--bg-light);
+ color: var(--text-dark);
+ line-height: 1.6;
+ }
+
+ a {
+ text-decoration: none;
+ color: inherit;
+ }
+
+ ul {
+ list-style: none;
+ }
+
+ /* NAVEGAÇÃO / CABEÇALHO */
+ .header-nav {
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+ background-color: var(--navy-900);
+ color: var(--text-light);
+ box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+ border-bottom: 2px solid var(--gold-500);
+ }
+
+ .nav-container {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 1rem 1.5rem;
+ }
+
+ .brand-logo {
+ display: flex;
+ flex-direction: column;
+ }
+
+ .brand-logo .title {
+ font-size: 1.4rem;
+ font-weight: 700;
+ letter-spacing: 1.5px;
+ color: var(--gold-400);
+ }
+
+ .brand-logo .oab-badge {
+ font-size: 0.75rem;
+ color: #a0aec0;
+ letter-spacing: 0.5px;
+ }
+
+ .nav-links {
+ display: flex;
+ gap: 1.5rem;
+ align-items: center;
+ }
+
+ .nav-links a {
+ font-size: 0.95rem;
+ transition: color 0.3s;
+ }
+
+ .nav-links a:hover {
+ color: var(--gold-400);
+ }
+
+ .menu-toggle {
+ display: none;
+ background: none;
+ border: none;
+ color: var(--text-light);
+ font-size: 1.5rem;
+ cursor: pointer;
+ }
+
+ /* BANNER PRINCIPAL (HERO) */
+ .hero {
+ background: linear-gradient(rgba(10, 17, 40, 0.88), rgba(10, 17, 40, 0.88)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+ color: var(--text-light);
+ padding: 6rem 1.5rem;
+ text-align: center;
+ }
+
+ .hero-content {
+ max-width: 800px;
+ margin: 0 auto;
+ }
+
+ .hero h1 {
+ font-size: 2.5rem;
+ margin-bottom: 0.5rem;
+ color: var(--gold-400);
+ letter-spacing: 1px;
+ }
+
+ .hero .hero-oab {
+ font-size: 1rem;
+ color: var(--gold-100);
+ margin-bottom: 1.5rem;
+ font-weight: 600;
+ }
+
+ .hero p {
+ font-size: 1.2rem;
+ margin-bottom: 2rem;
+ color: #e0e0e0;
+ }
+
+ .btn-gold {
+ display: inline-block;
+ background-color: var(--gold-500);
+ color: var(--navy-900);
+ padding: 0.85rem 2.2rem;
+ border-radius: 4px;
+ font-weight: 700;
+ transition: background-color 0.3s;
+ }
+
+ .btn-gold:hover {
+ background-color: var(--gold-400);
+ }
+
+ /* SECÇÕES & SEPARADORES */
+ .section-wrap {
+ padding: 5rem 1.5rem;
+ }
+
+ .container-wide {
+ max-width: 1200px;
+ margin: 0 auto;
+ }
+
+ .section-header-center {
+ text-align: center;
+ margin-bottom: 3rem;
+ }
+
+ .section-eyebrow {
+ display: block;
+ text-transform: uppercase;
+ font-size: 0.85rem;
+ font-weight: 700;
+ letter-spacing: 2px;
+ color: var(--gold-500);
+ margin-bottom: 0.5rem;
+ }
+
+ .section-title {
+ font-size: 2rem;
+ color: var(--navy-900);
+ margin-bottom: 1rem;
+ }
+
+ .section-subtitle {
+ color: var(--text-muted);
+ max-width: 600px;
+ margin: 0 auto;
+ }
+
+ /* GRELHA & CARTÕES DE SERVIÇO */
+ .grid-3 {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+ gap: 2rem;
+ }
+
+ .card {
+ background-color: var(--bg-card);
+ border: 1px solid #e9ecef;
+ border-radius: 8px;
+ padding: 2rem;
+ box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+ transition: transform 0.3s, box-shadow 0.3s;
+ }
+
+ .card:hover {
+ transform: translateY(-5px);
+ box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+ }
+
+ .card h3 {
+ color: var(--navy-900);
+ margin-bottom: 0.8rem;
+ }
+
+ /* DEPOIMENTOS */
+ .testimonials-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+ gap: 2rem;
+ }
+
+ .testimonial-card {
+ background: var(--bg-card);
+ padding: 2rem;
+ border-radius: 8px;
+ border-left: 4px solid var(--gold-500);
+ box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+ position: relative;
+ }
+
+ .quote-mark {
+ font-size: 3rem;
+ color: var(--gold-100);
+ position: absolute;
+ top: 10px;
+ right: 20px;
+ font-family: Georgia, serif;
+ }
+
+ .testimonial-stars {
+ color: var(--gold-400);
+ margin-bottom: 1rem;
+ }
+
+ .testimonial-text {
+ font-style: italic;
+ color: var(--text-dark);
+ margin-bottom: 1.5rem;
+ position: relative;
+ z-index: 1;
+ }
+
+ .client-name {
+ font-weight: 700;
+ color: var(--navy-900);
+ }
+
+ .client-case {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ }
+
+ /* SECÇÃO DE CONTACTO */
+ .contact-wrap {
+ background-color: var(--navy-900);
+ color: var(--text-light);
+ }
+
+ .contact-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 3rem;
+ }
+
+ .contact-left h2 {
+ font-size: 2rem;
+ margin: 1rem 0;
+ color: var(--gold-400);
+ }
+
+ .contact-info-list {
+ margin-top: 2rem;
+ }
+
+ .contact-info-item {
+ display: flex;
+ align-items: flex-start;
+ gap: 1rem;
+ margin-bottom: 1.5rem;
+ }
+
+ .contact-info-icon {
+ color: var(--gold-400);
+ margin-top: 3px;
+ }
+
+ .contact-info-text strong {
+ display: block;
+ color: #ffffff;
+ }
+
+ .contact-info-text a, .contact-info-text span {
+ color: #d1d5db;
+ }
+
+ .contact-info-text a:hover {
+ color: var(--gold-400);
+ }
+
+ .contact-form-box {
+ background-color: var(--navy-800);
+ padding: 2.5rem;
+ border-radius: 8px;
+ border: 1px solid rgba(197, 160, 89, 0.2);
+ }
+
+ .contact-form-box h3 {
+ margin-bottom: 0.5rem;
+ color: var(--gold-400);
+ }
+
+ .form-intro {
+ font-size: 0.9rem;
+ color: #adb5bd;
+ margin-bottom: 1.5rem;
+ }
+
+ .form-group {
+ margin-bottom: 1.2rem;
+ }
+
+ .form-group label {
+ display: block;
+ margin-bottom: 0.4rem;
+ font-size: 0.9rem;
+ }
+
+ .form-control {
+ width: 100%;
+ padding: 0.75rem;
+ border: 1px solid #495057;
+ border-radius: 4px;
+ background-color: var(--navy-900);
+ color: var(--text-light);
+ font-family: inherit;
+ }
+
+ .form-control:focus {
+ outline: none;
+ border-color: var(--gold-400);
+ }
+
+ .form-submit-btn {
+ width: 100%;
+ padding: 0.8rem;
+ background-color: var(--gold-500);
+ color: var(--navy-900);
+ border: none;
+ border-radius: 4px;
+ font-weight: 700;
+ cursor: pointer;
+ transition: background 0.3s;
+ }
+
+ .form-submit-btn:hover {
+ background-color: var(--gold-400);
+ }
+ 
+ .form-submit-btn:disabled {
+ background-color: #555;
+ color: #999;
+ cursor: not-allowed;
+ }
+
+ .form-alert {
+ display: none;
+ margin-top: 1rem;
+ padding: 0.75rem;
+ background-color: #d4edda;
+ color: #155724;
+ border-radius: 4px;
+ text-align: center;
+ font-size: 0.9rem;
+ }
+ 
+ .form-alert-error {
+ background-color: #f8d7da;
+ color: #721c24;
+ border: 1px solid #f5c6cb;
+ }
+
+ /* RODAPÉ */
+ .site-footer {
+ background-color: #050814;
+ color: #adb5bd;
+ padding: 4rem 1.5rem 2rem;
+ font-size: 0.9rem;
+ border-top: 1px solid rgba(197, 160, 89, 0.2);
+ }
+
+ .footer-container {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: grid;
+ grid-template-columns: 2fr 1fr 1fr;
+ gap: 3rem;
+ margin-bottom: 3rem;
+ }
+
+ .footer-brand h4 {
+ color: var(--gold-400);
+ margin-bottom: 0.5rem;
+ font-size: 1.2rem;
+ }
+
+ .footer-brand .oab-info {
+ color: var(--gold-100);
+ font-weight: 600;
+ margin-bottom: 1rem;
+ display: block;
+ }
+
+ .footer-links-col h5 {
+ color: var(--text-light);
+ margin-bottom: 1rem;
+ }
+
+ .footer-links-col ul li {
+ margin-bottom: 0.5rem;
+ }
+
+ .footer-links-col a:hover {
+ color: var(--gold-400);
+ }
+
+ .footer-bottom {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding-top: 2rem;
+ border-top: 1px solid #212529;
+ display: flex;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ gap: 1rem;
+ }
+
+ .footer-disclaimer {
+ font-size: 0.8rem;
+ color: #6c757d;
+ }
+
+ /* BOTÃO FLUTUANTE DE CONTACTO / WHATSAPP */
+ .whatsapp-float {
+ position: fixed;
+ bottom: 25px;
+ right: 25px;
+ width: 60px;
+ height: 60px;
+ background-color: #25d366;
+ color: #fff;
+ border-radius: 50px;
+ text-align: center;
+ box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+ z-index: 1000;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transition: transform 0.3s;
+ }
+
+ .whatsapp-float:hover {
+ transform: scale(1.08);
+ }
+
+ .whatsapp-float svg {
+ width: 32px;
+ height: 32px;
+ fill: #fff;
+ }
+
+ /* DESIGN RESPONSIVO */
+ @media (max-width: 768px) {
+ .nav-links {
+ display: none;
+ flex-direction: column;
+ position: absolute;
+ top: 100%;
+ left: 0;
+ right: 0;
+ background-color: var(--navy-900);
+ padding: 1.5rem;
+ }
+
+ .nav-links.active {
+ display: flex;
+ }
+
+ .menu-toggle {
+ display: block;
+ }
+
+ .contact-grid {
+ grid-template-columns: 1fr;
+ }
+
+ .footer-container {
+ grid-template-columns: 1fr;
+ }
+ }
+ </style>
 </head>
 <body>
 
-  <!-- Navegação -->
-  <header class="header-nav">
-    <div class="nav-container">
-      <div class="brand-logo">
-        <span class="title">RBS ADVOCACIA</span>
-        <span class="oab-badge">OAB/SP nº 459.587</span>
-      </div>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre o Escritório</a>
-        <a href="#execucoes">Execuções</a>
-        <a href="#areas">Áreas de Atuação</a>
-        <a href="#depoimentos">Depoimentos</a>
-        <a href="#contato">Contacto</a>
-      </nav>
-    </div>
-  </header>
+ <!-- Navegação -->
+ <header class="header-nav">
+ <div class="nav-container">
+ <div class="brand-logo">
+ <span class="title">RBS ADVOCACIA</span>
+ <span class="oab-badge">OAB/SP nº 459.587</span>
+ </div>
+ <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
+ <nav class="nav-links" id="navLinks">
+ <a href="#inicio">Início</a>
+ <a href="#sobre">Sobre o Escritório</a>
+ <a href="#execucoes">Execuções</a>
+ <a href="#areas">Áreas de Atuação</a>
+ <a href="#depoimentos">Depoimentos</a>
+ <a href="#contato">Contacto</a>
+ </nav>
+ </div>
+ </header>
 
-  <main>
-    <!-- 1. Banner Principal -->
-    <section class="hero" id="inicio">
-      <div class="hero-content">
-        <h1>RBS ADVOCACIA</h1>
-        <div class="hero-oab">Dra. Roseli Bispo • OAB/SP nº 459.587</div>
-        <p>Atuação especializada no Contencioso Complexo, Direito Tributário, Execuções e Defesa Patrimonial com rigor técnico e ética.</p>
-        <a href="https://api.whatsapp.com/send?phone=5511960762828" class="btn-gold" target="_blank" rel="noopener noreferrer">Agende uma Consulta Jurídica</a>
-      </div>
-    </section>
+ <main>
+ <!-- 1. Banner Principal -->
+ <section class="hero" id="inicio">
+ <div class="hero-content">
+ <h1>RBS ADVOCACIA</h1>
+ <div class="hero-oab">Dra. Roseli Bispo • OAB/SP nº 459.587</div>
+ <p>Atuação especializada no Contencioso Complexo, Direito Tributário, Execuções e Defesa Patrimonial com rigor técnico e ética.</p>
+ <a href="https://api.whatsapp.com/send?phone=5511960762828" class="btn-gold" target="_blank" rel="noopener noreferrer">Agende uma Consulta Jurídica</a>
+ </div>
+ </section>
 
-    <!-- 2. Sobre o Escritório -->
-    <section class="section-wrap" id="sobre">
-      <div class="container-wide">
-        <div class="section-header-center">
-          <span class="section-eyebrow">Sobre a Advogada</span>
-          <h2 class="section-title">Dra. Roseli Bispo (OAB/SP 459.587)</h2>
-          <p class="section-subtitle">
-            Com sólida formação e compromisso ético, oferecemos consultoria e patrocínio de causas com foco na proteção dos seus direitos e segurança patrimonial.
-          </p>
-        </div>
-      </div>
-    </section>
+ <!-- 2. Sobre o Escritório -->
+ <section class="section-wrap" id="sobre">
+ <div class="container-wide">
+ <div class="section-header-center">
+ <span class="section-eyebrow">Sobre a Advogada</span>
+ <h2 class="section-title">Dra. Roseli Bispo (OAB/SP 459.587)</h2>
+ <p class="section-subtitle">
+ Com sólida formação e compromisso ético, oferecemos consultoria e patrocínio de causas com foco na proteção dos seus direitos e segurança patrimonial.
+ </p>
+ </div>
+ </div>
+ </section>
 
-    <!-- 3. Execuções e Defesa Patrimonial -->
-    <section class="section-wrap" id="execucoes" style="background-color: #f1f3f5;">
-      <div class="container-wide">
-        <div class="section-header-center">
-          <span class="section-eyebrow">Especialidade Estratégica</span>
-          <h2 class="section-title">Direito das Execuções & Defesa Patrimonial</h2>
-          <p class="section-subtitle">
-            Acompanhamento minucioso de processos executivos, penhoras, avaliações patrimoniais e impugnações para resguardar garantias legais.
-          </p>
-        </div>
-      </div>
-    </section>
+ <!-- 3. Execuções e Defesa Patrimonial -->
+ <section class="section-wrap" id="execucoes" style="background-color: #f1f3f5;">
+ <div class="container-wide">
+ <div class="section-header-center">
+ <span class="section-eyebrow">Especialidade Estratégica</span>
+ <h2 class="section-title">Direito das Execuções & Defesa Patrimonial</h2>
+ <p class="section-subtitle">
+ Acompanhamento minucioso de processos executivos, penhoras, avaliações patrimoniais e impugnações para resguardar garantias legais.
+ </p>
+ </div>
+ </div>
+ </section>
 
-    <!-- 4. Áreas de Atuação -->
-    <section class="section-wrap" id="areas">
-      <div class="container-wide">
-        <div class="section-header-center">
-          <span class="section-eyebrow">Áreas de Atuação</span>
-          <h2 class="section-title">Especialidades do Escritório</h2>
-        </div>
-        <div class="grid-3">
-          <div class="card">
-            <h3>Direito Tributário</h3>
-            <p>Defesa em execuções fiscais, planejamento tributário preventivo e recuperação de créditos com eficiência jurídica.</p>
-          </div>
-          <div class="card">
-            <h3>Direito Imobiliário</h3>
-            <p>Assessoria na compra, venda, regularização de imóveis, contratos e suporte integral em leilões imobiliários.</p>
-          </div>
-          <div class="card">
-            <h3>Família e Sucessões</h3>
-            <p>Inventários, partilhas de bens, planejamento sucessório e resolução de conflitos com abordagem ética e humanizada.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+ <!-- 4. Áreas de Atuação -->
+ <section class="section-wrap" id="areas">
+ <div class="container-wide">
+ <div class="section-header-center">
+ <span class="section-eyebrow">Áreas de Atuação</span>
+ <h2 class="section-title">Especialidades do Escritório</h2>
+ </div>
+ <div class="grid-3">
+ <div class="card">
+ <h3>Direito Tributário</h3>
+ <p>Defesa em execuções fiscais, planejamento tributário preventivo e recuperação de créditos com eficiência jurídica.</p>
+ </div>
+ <div class="card">
+ <h3>Direito Imobiliário</h3>
+ <p>Assessoria na compra, venda, regularização de imóveis, contratos e suporte integral em leilões imobiliários.</p>
+ </div>
+ <div class="card">
+ <h3>Família e Sucessões</h3>
+ <p>Inventários, partilhas de bens, planeamento sucessório e resolução de conflitos com abordagem ética e humanizada.</p>
+ </div>
+ </div>
+ </div>
+ </section>
 
-    <!-- 5. Depoimentos -->
-    <section class="section-wrap" id="depoimentos" style="background-color: #f1f3f5;">
-      <div class="container-wide">
-        <div class="section-header-center">
-          <span class="section-eyebrow">Aprovação & Confiança</span>
-          <h2 class="section-title">O que dizem os nossos clientes</h2>
-          <p class="section-subtitle">
-            A satisfação e a tranquilidade daqueles que confiam no nosso trabalho são o maior testemunho do nosso compromisso.
-          </p>
-        </div>
+ <!-- 5. Depoimentos -->
+ <section class="section-wrap" id="depoimentos" style="background-color: #f1f3f5;">
+ <div class="container-wide">
+ <div class="section-header-center">
+ <span class="section-eyebrow">Aprovação & Confiança</span>
+ <h2 class="section-title">O que dizem os nossos clientes</h2>
+ <p class="section-subtitle">
+ A satisfação e a tranquilidade daqueles que confiam no nosso trabalho são o maior testemunho do nosso compromisso.
+ </p>
+ </div>
 
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <span class="quote-mark">“</span>
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-              A Dra. Roseli e a sua equipa atuaram com extrema firmeza e agilidade na condução de um processo imobiliário complexo. A clareza nas explicações e o suporte prestado deram-nos total segurança.
-            </p>
-            <div class="client-info">
-              <div class="client-name">M. R. Silva</div>
-              <div class="client-case">Direito Imobiliário & Regularização</div>
-            </div>
-          </div>
+ <div class="testimonials-grid">
+ <div class="testimonial-card">
+ <span class="quote-mark">“</span>
+ <div class="testimonial-stars">★★★★★</div>
+ <p class="testimonial-text">
+ A Dra. Roseli e a sua equipa atuaram com extrema firmeza e agilidade na condução de um processo imobiliário complexo. A clareza nas explicações e o suporte prestado deram-nos total segurança.
+ </p>
+ <div class="client-info">
+ <div class="client-name">M. R. Silva</div>
+ <div class="client-case">Direito Imobiliário & Regularização</div>
+ </div>
+ </div>
 
-          <div class="testimonial-card">
-            <span class="quote-mark">“</span>
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-              Excelente atendimento no contencioso tributário e em execuções. Profissionais éticos, altamente capacitados e sempre disponíveis para sanar dúvidas com transparência. Recomendo com toda a confiança.
-            </p>
-            <div class="client-info">
-              <div class="client-name">A. L. Mendes</div>
-              <div class="client-case">Planejamento & Defesa Tributária</div>
-            </div>
-          </div>
+ <div class="testimonial-card">
+ <span class="quote-mark">“</span>
+ <div class="testimonial-stars">★★★★★</div>
+ <p class="testimonial-text">
+ Excelente atendimento no contencioso tributário e em execuções. Profissionais éticos, altamente capacitados e sempre disponíveis para sanar dúvidas com transparência. Recomendo com toda a confiança.
+ </p>
+ <div class="client-info">
+ <div class="client-name">A. L. Mendes</div>
+ <div class="client-case">Planejamento & Defesa Tributária</div>
+ </div>
+ </div>
 
-          <div class="testimonial-card">
-            <span class="quote-mark">“</span>
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-              Fui atendida com um humanismo e uma empatia ímpares num momento de inventário familiar delicado. O rigor técnico associado ao respeito pela nossa história fez toda a diferença.
-            </p>
-            <div class="client-info">
-              <div class="client-name">C. F. Oliveira</div>
-              <div class="client-case">Família e Sucessões</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+ <div class="testimonial-card">
+ <span class="quote-mark">“</span>
+ <div class="testimonial-stars">★★★★★</div>
+ <p class="testimonial-text">
+ Fui atendida com um humanismo e uma empatia ímpares num momento de inventário familiar delicado. O rigor técnico associado ao respeito pela nossa história fez toda a diferença.
+ </p>
+ <div class="client-info">
+ <div class="client-name">C. F. Oliveira</div>
+ <div class="client-case">Família e Sucessões</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
 
-    <!-- 6. Contacto e Localização -->
-    <section class="section-wrap contact-wrap" id="contato">
-      <div class="container-wide">
-        <div class="contact-grid">
-          <div class="contact-left">
-            <span class="section-eyebrow" style="color: var(--gold-400);">Fale Conosco</span>
-            <h2>Agende uma consulta jurídica</h2>
-            <p>
-              Estamos prontos para analisar o seu caso com total sigilo, dedicação e eficiência. Entre em contacto através dos nossos canais oficiais.
-            </p>
+ <!-- 6. Contacto e Localização -->
+ <section class="section-wrap contact-wrap" id="contato">
+ <div class="container-wide">
+ <div class="contact-grid">
+ <div class="contact-left">
+ <span class="section-eyebrow" style="color: var(--gold-400);">Fale Conosco</span>
+ <h2>Agende uma consulta jurídica</h2>
+ <p>
+ Estamos prontos para analisar o seu caso com total sigilo, dedicação e eficiência. Entre em contacto através dos nossos canais oficiais.
+ </p>
 
-            <div class="contact-info-list">
-              <div class="contact-info-item">
-                <div class="contact-info-icon">
-                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                </div>
-                <div class="contact-info-text">
-                  <strong>Endereço do Escritório:</strong>
-                  <span>Rua Independência, 43 - Vila Boa Vista - Barueri/SP</span>
-                </div>
-              </div>
+ <div class="contact-info-list">
+ <div class="contact-info-item">
+ <div class="contact-info-icon">
+ <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+ </div>
+ <div class="contact-info-text">
+ <strong>Endereço do Escritório:</strong>
+ <span>Rua Independência, 43 - Vila Boa Vista - Barueri/SP</span>
+ </div>
+ </div>
 
-              <div class="contact-info-item">
-                <div class="contact-info-icon">
-                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </div>
-                <div class="contact-info-text">
-                  <strong>WhatsApp Directo:</strong>
-                  <a href="https://api.whatsapp.com/send?phone=5511960762828" target="_blank" rel="noopener noreferrer">(11) 96076-2828</a>
-                </div>
-              </div>
+ <div class="contact-info-item">
+ <div class="contact-info-icon">
+ <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+ </div>
+ <div class="contact-info-text">
+ <strong>WhatsApp Directo:</strong>
+ <a href="https://api.whatsapp.com/send?phone=5511960762828" target="_blank" rel="noopener noreferrer">(11) 96076-2828</a>
+ </div>
+ </div>
 
-              <div class="contact-info-item">
-                <div class="contact-info-icon">
-                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </div>
-                <div class="contact-info-text">
-                  <strong>Telefone Fixo:</strong>
-                  <a href="tel:1134958888">(11) 3495-8888</a>
-                </div>
-              </div>
+ <div class="contact-info-item">
+ <div class="contact-info-icon">
+ <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+ </div>
+ <div class="contact-info-text">
+ <strong>Telefone Fixo:</strong>
+ <a href="tel:1134958888">(11) 3495-8888</a>
+ </div>
+ </div>
 
-              <div class="contact-info-item">
-                <div class="contact-info-icon">
-                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </div>
-                <div class="contact-info-text">
-                  <strong>E-mail Institucional:</strong>
-                  <a href="mailto:roseli.bispo@adv.oabsp.org.br">roseli.bispo@adv.oabsp.org.br</a>
-                </div>
-              </div>
-            </div>
-          </div>
+ <div class="contact-info-item">
+ <div class="contact-info-icon">
+ <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+ </div>
+ <div class="contact-info-text">
+ <strong>E-mail Institucional:</strong>
+ <a href="mailto:roseli.bispo@adv.oabsp.org.br">roseli.bispo@adv.oabsp.org.br</a>
+ </div>
+ </div>
+ </div>
+ </div>
 
-          <div class="contact-form-box">
-            <h3>Enviar mensagem</h3>
-            <p class="form-intro">Preencha os campos abaixo para solicitar um atendimento direcionado.</p>
-            
-            <form id="contactForm" onsubmit="event.preventDefault(); document.getElementById('formAlert').style.display='block';">
-              <div class="form-group">
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" class="form-control" required placeholder="Seu nome completo">
-              </div>
+ <div class="contact-form-box">
+ <h3>Enviar mensagem</h3>
+ <p class="form-intro">Preencha os campos abaixo para solicitar um atendimento direcionado.</p>
+ 
+ <form id="contactForm">
+ <div class="form-group">
+ <label for="nome">Nome Completo</label>
+ <input type="text" id="nome" name="nome" class="form-control" required placeholder="Seu nome completo" data-fs-field>
+ </div>
 
-              <div class="form-group">
-                <label for="email">E-mail de Contacto</label>
-                <input type="email" id="email" class="form-control" required placeholder="seuemail@exemplo.com">
-              </div>
+ <div class="form-group">
+ <label for="email">E-mail de Contacto</label>
+ <input type="email" id="email" name="email" class="form-control" required placeholder="seuemail@exemplo.com" data-fs-field>
+ </div>
 
-              <div class="form-group">
-                <label for="telefone">Telefone / WhatsApp</label>
-                <input type="tel" id="telefone" class="form-control" required placeholder="(11) 99999-9999">
-              </div>
+ <div class="form-group">
+ <label for="telefone">Telefone / WhatsApp</label>
+ <input type="tel" id="telefone" name="telefone" class="form-control" required placeholder="(11) 99999-9999" data-fs-field>
+ </div>
 
-              <div class="form-group">
-                <label for="assunto">Assunto Principal</label>
-                <select id="assunto" class="form-control" required>
-                  <option value="" disabled selected>Selecione a área de interesse</option>
-                  <option value="execucoes">Direito das Execuções</option>
-                  <option value="tributario">Direito Tributário</option>
-                  <option value="imobiliario">Direito Imobiliário</option>
-                  <option value="civil">Direito Civil</option>
-                  <option value="familia">Direito de Família e Sucessões</option>
-                  <option value="outros">Outros Assuntos</option>
-                </select>
-              </div>
+ <div class="form-group">
+ <label for="assunto">Assunto Principal</label>
+ <select id="assunto" name="assunto" class="form-control" required data-fs-field>
+ <option value="" disabled selected>Selecione a área de interesse</option>
+ <option value="execucoes">Direito das Execuções</option>
+ <option value="tributario">Direito Tributário</option>
+ <option value="imobiliario">Direito Imobiliário</option>
+ <option value="civil">Direito Civil</option>
+ <option value="familia">Direito de Família e Sucessões</option>
+ <option value="outros">Outros Assuntos</option>
+ </select>
+ </div>
 
-              <div class="form-group">
-                <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" class="form-control" rows="4" required placeholder="Descreva sucintamente a sua necessidade jurídica..."></textarea>
-              </div>
+ <div class="form-group">
+ <label for="mensagem">Mensagem</label>
+ <textarea id="mensagem" name="mensagem" class="form-control" rows="4" required placeholder="Descreva sucintamente a sua necessidade jurídica..." data-fs-field></textarea>
+ </div>
 
-              <button type="submit" class="form-submit-btn">Enviar Solicitação</button>
-              <div class="form-alert" id="formAlert">✓ A sua mensagem foi enviada com sucesso! Entraremos em contacto em breve.</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+ <button type="submit" class="form-submit-btn" data-fs-submit-btn>Enviar Solicitação</button>
+ 
+ <div class="form-alert" id="formAlert" data-fs-success>✓ A sua mensagem foi enviada com sucesso! Entraremos em contacto em breve.</div>
+ <div class="form-alert form-alert-error" data-fs-error>Ocorreu um erro ao enviar a sua mensagem. Verifique os dados e tente novamente.</div>
+ </form>
+ </div>
+ </div>
+ </div>
+ </section>
+ </main>
 
-  <!-- Rodapé -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <h4>RBS ADVOCACIA</h4>
-        <span class="oab-info">Dra. Roseli Bispo • OAB/SP nº 459.587</span>
-        <p>Sociedade Individual de Advocacia. Atuação pautada na ética, na excelência técnica e no compromisso rigoroso com a defesa dos direitos dos nossos clientes.</p>
-      </div>
+ <!-- Rodapé -->
+ <footer class="site-footer">
+ <div class="footer-container">
+ <div class="footer-brand">
+ <h4>RBS ADVOCACIA</h4>
+ <span class="oab-info">Dra. Roseli Bispo • OAB/SP nº 459.587</span>
+ <p>Sociedade Individual de Advocacia. Atuação pautada na ética, na excelência técnica e no compromisso rigoroso com a defesa dos direitos dos nossos clientes.</p>
+ </div>
 
-      <div class="footer-links-col">
-        <h5>Navegação</h5>
-        <ul>
-          <li><a href="#inicio">Início</a></li>
-          <li><a href="#sobre">Sobre o Escritório</a></li>
-          <li><a href="#execucoes">Execuções</a></li>
-          <li><a href="#areas">Áreas de Atuação</a></li>
-          <li><a href="#depoimentos">Depoimentos</a></li>
-          <li><a href="#contato">Contacto</a></li>
-        </ul>
-      </div>
+ <div class="footer-links-col">
+ <h5>Navegação</h5>
+ <ul>
+ <li><a href="#inicio">Início</a></li>
+ <li><a href="#sobre">Sobre o Escritório</a></li>
+ <li><a href="#execucoes">Execuções</a></li>
+ <li><a href="#areas">Áreas de Atuação</a></li>
+ <li><a href="#depoimentos">Depoimentos</a></li>
+ <li><a href="#contato">Contacto</a></li>
+ </ul>
+ </div>
 
-      <div class="footer-links-col">
-        <h5>Áreas Principais</h5>
-        <ul>
-          <li><a href="#execucoes">Direito das Execuções</a></li>
-          <li><a href="#areas">Direito Tributário</a></li>
-          <li><a href="#areas">Direito Imobiliário</a></li>
-          <li><a href="#areas">Família e Sucessões</a></li>
-        </ul>
-      </div>
-    </div>
+ <div class="footer-links-col">
+ <h5>Áreas Principais</h5>
+ <ul>
+ <li><a href="#execucoes">Direito das Execuções</a></li>
+ <li><a href="#areas">Direito Tributário</a></li>
+ <li><a href="#areas">Direito Imobiliário</a></li>
+ <li><a href="#areas">Família e Sucessões</a></li>
+ </ul>
+ </div>
+ </div>
 
-    <div class="footer-bottom">
-      <div>
-        © 2026 RBS ADVOCACIA • OAB/SP nº 459.587. Todos os direitos reservados.
-      </div>
-      <div class="footer-disclaimer">
-        Este site possui caráter estritamente informativo e atende aos ditames do Código de Ética e Disciplina da OAB.
-      </div>
-    </div>
-  </footer>
+ <div class="footer-bottom">
+ <div>
+ © 2026 RBS ADVOCACIA • OAB/SP nº 459.587. Todos os direitos reservados.
+ </div>
+ <div class="footer-disclaimer">
+ Este site possui caráter estritamente informativo e atende aos ditames do Código de Ética e Disciplina da OAB.
+ </div>
+ </div>
+ </footer>
 
-  <!-- Botão Flutuante do WhatsApp -->
-  <a href="https://api.whatsapp.com/send?phone=5511960762828" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Atendimento via WhatsApp">
-    <svg viewBox="0 0 32 32">
-      <path d="M16 2a13.94 13.94 0 0 0-12 21.12L2 30l7.12-1.87A13.94 13.94 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.88-1.61l-.42-.25-4.36 1.14 1.16-4.25-.27-.44A11.51 11.51 0 1 1 16 27.5zm6.31-8.62c-.35-.17-2.06-1.02-2.38-1.14s-.55-.17-.79.17-.92 1.14-1.13 1.38-.42.27-.77.1a9.7 9.7 0 0 1-2.85-1.76 10.7 10.7 0 0 1-1.98-2.46c-.2-.35 0-.54.17-.71.16-.16.35-.42.53-.63s.24-.35.36-.59.06-.44-.03-.61-.79-1.91-1.08-2.61c-.28-.68-.57-.59-.79-.6s-.45-.01-.69-.01a1.33 1.33 0 0 0-.96.45 4 4 0 0 0-1.25 2.97 6.96 6.96 0 0 0 1.46 3.69 15.93 15.93 0 0 0 6.1 5.39c2.31.91 3.22.95 4.37.78a3.72 3.72 0 0 0 2.45-1.73 3 3 0 0 0 .21-1.73c-.09-.16-.34-.26-.69-.43z"/>
-    </svg>
-  </a>
+ <!-- Botão Flutuante do WhatsApp -->
+ <a href="https://api.whatsapp.com/send?phone=5511960762828" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Atendimento via WhatsApp">
+ <svg viewBox="0 0 32 32">
+ <path d="M16 2a13.94 13.94 0 0 0-12 21.12L2 30l7.12-1.87A13.94 13.94 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.88-1.61l-.42-.25-4.36 1.14 1.16-4.25-.27-.44A11.51 11.51 0 1 1 16 27.5zm6.31-8.62c-.35-.17-2.06-1.02-2.38-1.14s-.55-.17-.79.17-.92 1.14-1.13 1.38-.42.27-.77.1a9.7 9.7 0 0 1-2.85-1.76 10.7 10.7 0 0 1-1.98-2.46c-.2-.35 0-.54.17-.71.16-.16.35-.42.53-.63s.24-.35.36-.59.06-.44-.03-.61-.79-1.91-1.08-2.61c-.28-.68-.57-.59-.79-.6s-.45-.01-.69-.01a1.33 1.33 0 0 0-.96.45 4 4 0 0 0-1.25 2.97 6.96 6.96 0 0 0 1.46 3.69 15.93 15.93 0 0 0 6.1 5.39c2.31.91 3.22.95 4.37.78a3.72 3.72 0 0 0 2.45-1.73 3 3 0 0 0 .21-1.73c-.09-.16-.34-.26-.69-.43z"/>
+ </svg>
+ </a>
 
-  <script>
-    // Toggle para o Menu Mobile
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
+ <script>
+ // Toggle para o Menu Mobile
+ const menuToggle = document.getElementById('menuToggle');
+ const navLinks = document.getElementById('navLinks');
 
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+ menuToggle.addEventListener('click', () => {
+ navLinks.classList.toggle('active');
+ });
 
-    // Fechar menu ao clicar num link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-      });
-    });
-  </script>
+ // Fechar menu ao clicar num link
+ document.querySelectorAll('.nav-links a').forEach(link => {
+ link.addEventListener('click', () => {
+ navLinks.classList.remove('active');
+ });
+ });
+ </script>
+ 
+ <!-- Scripts Formspree -->
+ <script>
+ window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+ formspree('initForm', { formElement: '#contactForm', formId: 'xnpnywly' });
+ </script>
+ <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+ 
 </body>
 </html>
